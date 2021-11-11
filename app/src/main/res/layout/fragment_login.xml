@@ -52,7 +52,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/registerButton"
+            android:id="@+id/backToRegisterButton"
             android:layout_width="0dp"
             android:layout_weight="0.4"
             android:layout_height="wrap_content"

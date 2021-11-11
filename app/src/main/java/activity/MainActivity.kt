@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.core.view.ViewCompat
 import com.example.maple.R
 import com.example.maple.databinding.ActivityMainBinding
@@ -16,15 +17,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val sharedPreferences = this?.getPreferences(Context.MODE_PRIVATE) ?: null;
-
-        if(sharedPreferences == null || sharedPreferences?.getString("username", "") == "" || sharedPreferences?.getString("password", "") != ""){
+        val sharedPreferences = this.getSharedPreferences("UserData",Context.MODE_PRIVATE);
+        if(sharedPreferences == null || sharedPreferences.getString("username", "")!!.isEmpty() || sharedPreferences.getString(
+                "password",
+                ""
+            )!!.isEmpty()
+        ){
             val intent = Intent(this, AuthenticationActivity::class.java)
             startActivity(intent)
-        }else{
-            initView()
         }
-
+        initView()
     }
 
     private fun initView(){
