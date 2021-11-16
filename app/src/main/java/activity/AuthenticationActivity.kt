@@ -10,6 +10,8 @@ import com.example.maple.R
 import com.example.maple.databinding.ActivityAuthenticationBinding
 import com.example.maple.databinding.ActivityMainBinding
 import fragment.LoginFragment
+import fragment.RegisterFragment
+import model.ApiModel
 
 class AuthenticationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAuthenticationBinding
@@ -28,10 +30,46 @@ class AuthenticationActivity : AppCompatActivity() {
         }
     }
 
+    public fun login(username: String, password: String){
+        ApiModel(baseContext, this).login(username, password)
+    }
+
+    public fun resolveLogin(username: String, password: String, apiToken: String){
+        val sharedPreferences = this.getSharedPreferences("UserData",Context.MODE_PRIVATE);
+        with(sharedPreferences.edit()){
+            putString("username", username)
+            putString("password", password)
+            putString("apiToken", apiToken)
+            apply()
+            commit()
+        }
+        super.onBackPressed()
+    }
+
+    public fun register(username: String, email: String, password: String, password_confirm: String){
+        ApiModel(baseContext, this).register(username,email,password,password_confirm)
+    }
+
+    public fun resolveRegister(){
+        showLogin()
+    }
+
+    public fun showLogin(){
+        fragmentManager.commit {
+            setReorderingAllowed(true)
+            replace(R.id.authFrame, LoginFragment(this@AuthenticationActivity))
+        }
+    }
+
+    public fun showRegister(){
+        fragmentManager.commit{
+            setReorderingAllowed(true)
+            replace(R.id.authFrame, RegisterFragment(this@AuthenticationActivity))
+        }
+    }
     override fun onBackPressed() {
        // super.onBackPressed()
     }
-    public fun resolveLogin(username: String, password: String){
-    }
+
 
 }
