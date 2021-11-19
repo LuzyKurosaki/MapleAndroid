@@ -1,17 +1,14 @@
 package activity
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import com.example.maple.R
 import com.example.maple.databinding.ActivityAuthenticationBinding
-import com.example.maple.databinding.ActivityMainBinding
 import fragment.LoginFragment
 import fragment.RegisterFragment
-import model.ApiModel
+import model.AuthenticationModel
 
 class AuthenticationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAuthenticationBinding
@@ -31,7 +28,7 @@ class AuthenticationActivity : AppCompatActivity() {
     }
 
     public fun login(username: String, password: String){
-        ApiModel(baseContext, this).login(username, password)
+        AuthenticationModel(baseContext, this).login(username, password)
     }
 
     public fun resolveLogin(username: String, password: String, apiToken: String){
@@ -47,7 +44,7 @@ class AuthenticationActivity : AppCompatActivity() {
     }
 
     public fun register(username: String, email: String, password: String, password_confirm: String){
-        ApiModel(baseContext, this).register(username,email,password,password_confirm)
+        AuthenticationModel(baseContext, this).register(username,email,password,password_confirm)
     }
 
     public fun resolveRegister(){

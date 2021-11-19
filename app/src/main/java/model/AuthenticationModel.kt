@@ -12,8 +12,8 @@ import com.google.gson.Gson
 import java.lang.Exception
 import java.util.HashMap
 
-class ApiModel(private val context: Context, private val activity : AuthenticationActivity) {
-    private val baseUrl: String =  "https://masouri.de/api"
+class AuthenticationModel(private val context: Context, private val activity : AuthenticationActivity) {
+    private val baseUrl: String =  "https://10.0.2.2:443/maple.test/api"
     private val queue = Volley.newRequestQueue(context);
 
     class AuthResponse(val message: String, val success: Boolean)
